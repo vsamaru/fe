@@ -1,140 +1,117 @@
-import './6cc/index'
-import db from './6cc/db'
-import { render } from 'posthtml-render'
-import { getAssetFromKV, mapRequestToAsset } from './asset'
-addEventListener('fetch', event => {
-    O = O || {}
-    event.respondWith(handle(event).catch(err => console.error(err)))
-})
+/**
+ * Example someHost is set up to respond with JSON and HTML according to the path
+ *  */
+const someHost = 'https://workers-tooling.cf/demos'
+const someJSONURL = someHost + '/requests/json'
+const someHTMLURL = someHost + '/static/html'
+const someJSONToSend = {
+  results: ['default data to send'],
+  errors: null,
+  msg: 'I sent this to the fetch',
+}
+const someDefaultJSONToRespond = {
+  results: ['default result'],
+  errors: null,
+  msg: 'success in sending a POST',
+}
 
-async function handle(event) {
-    var { request } = event
-    var { method, url } = request
-    var url = new URL(url)
-    var { pathname } = url
-    pathname = pathname.replace("/", "")
-    const params = {}
-    const queryString = url.search.slice(1).split('&')
-    queryString.forEach(item => {
-        const [key, value] = item.split('=')
-        if (key) params[key] = value || true
-    })
-    switch (method) {
-        case 'POST':
-            await console.N(await request.json())
-            return new Response({ status: 200 })
-        case 'GET':
-            switch (pathname) {
-                case 'l':
+/**
+ * gatherResponse awaits and returns a response body as a string.
+ * Use await gatherResponse(..) in an async function to get the response body
+ * @param {Response} response to
+ */
+async function gatherResponse(response) {
+  const { headers } = response
+  const contentType = headers.get('content-type')
 
-                    return new Response(JSON.stringify(await console.DB.list()), {
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                case 'x':
-                    await console.DB.put({
-                        date: Date.now()
-                    }, params.i, 1)
-                    return new Response({ status: 200 })
-                case '':
-                    return handleEvent(event)
-                case 'favicon.ico':
-                case 'robots.txt':
-                    return new Response(null, { status: 204 })
-            }
+  if (contentType.includes('application/json')) {
+    const body = await response.json()
+    return JSON.stringify(body)
+  } else if (contentType.includes('application/text')) {
+    const body = await response.text()
+    return body
+  } else if (contentType.includes('text/html')) {
+    const body = await response.text()
+    return body
+  } else {
+    const body = await response.text()
+    return body
+  }
+}
+
+/**
+ * fetchPostJson sends a POST request with data in JSON and
+ * and reads in the response body. Use await fetchPostJson(..)
+ * in an async function to get the response body
+ * @param {string} url the URL to send the request to
+ * @param {BodyInit} body the JSON data to send in the request
+ */
+async function fetchPostJson(url, body = {}) {
+  const init = {
+    body: JSON.stringify(body),
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json;charset=UTF-8',
+    },
+  }
+
+  const response = await fetch(url, init)
+  const results = await gatherResponse(response)
+  const retBody = Object.assign(someDefaultJSONToRespond, { results })
+  return JSON.stringify(retBody)
+}
+
+/**
+ * fetchGetHtml sends a GET request expecting html
+ * Use await fetchGetHtml(..) in an async function to get the HTML
+ * @param {string} url the URL to send the request to
+ */
+async function fetchGetHtml(url) {
+  const init = {
+    method: 'Get',
+    headers: {
+      'content-type': 'text/html;charset=UTF-8',
+    },
+  }
+
+  const response = await fetch(url)
+  const respBody = await gatherResponse(response)
+  return respBody
+}
+
+/**
+ * Example of how fetch methods above can be used in an application
+ *  */
+
+addEventListener('fetch', async event => {
+  const { url, method } = event.request
+
+  // Set respBody and init according to the route
+  // and method of the incoming request
+  if (url.endsWith('/html')) {
+    init = {
+      headers: {
+        'content-type': 'text/html;charset=UTF-8',
+      },
     }
-   // return new Response({ status: 200 })
-}
-async function handleEvent(event) {
+    respBody = fetchGetHtml(someHTMLURL)
+  }
 
-  var vv = await db.list()
-  var rr = ""
- var w = await vv.map(e => {rr+=`<figcaption>${e.pic}</figcaption>`})
- vv = vv.reverse()
-    var v = await vv.map((e,i) => {
-        var f = e.id
-if(i < 1) f = "<br><br>"+rr
-        return `<img src="${e.url}" onclick=fetch("/x?i=${e.id}")><figcaption>${f}</figcaption><br><br>`})
-    v = v.reverse()
-   // v.push(w)
-    // v = [...v,...w]
-   // console.warn(v)
-    const tree = []
-    const node = {}
-    node.tag = 'article'
-    node.attrs = { class: 'article__content' }
-    node.content = await v.map((content) => ({ tag: "figure", content }))
-    tree.push(node)
-    const html = render(tree, {})
+  if (url.endsWith('/json')) {
+    init = {
+      headers: {
+        'content-type': 'application/json;charset=UTF-8',
+      },
+    }
+    respBody = fetchPostJson(someJSONURL, someJSONToSend)
+  }
 
-var H = (x,v) => `<!DOCTYPE html>
-<head>
-    <meta property="og:site_name" content="ㅤ">
-    <meta property="og:title" content="ㅤ">
-    <meta property="og:description" content="${vv.length}">
-    <meta property="og:image" content="${vv.reverse()[0].url}">
- <meta data-rh="true" property="al:android:app_name" content="Medium" />
-    <meta property="article:published_time" content="2020-02-03T23:10:04.654Z">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
-    <link rel="icon" type="image/png" href="https://life.godo.com.ua/wp-content/uploads/2020/11/cropped-favicon.png"/>
-<style>
-* {
-      clear: both; 
-    text-align: center; 
-    margin-left: auto; 
-    margin-right: auto;
-  background-color: #222;
-}
-figure {
-
-    box-sizing: border-box; 
-    margin-left: 5px;
-    margin-right: 5px;
-
-min-height: 100%; 
-    width: auto;
-    display: flex;
-    flex-flow: column;
-    margin: auto;
-    align: center;
-}
-img {
-     width: 960px;
-}
-figcaption {
-    font-size: 42px;
-  max-height: 44px; 
-    color: #fff;
-    font-family: "Yanone Kaffeesatz";
-    text-align: center;
-}
-</style>
-</head>
-<body>
-    <div class="article">
-       
-${x}
-
-    </div>
-</body>
-</html>`
-
-
-    return new Response(H(html,vv), {
-        headers: {
-            'Content-Type': 'text/html;charset=UTF-8',
-            'Access-Control-Allow-Origin': '*',
-            "Cache-Control": "max-age=0"
-        }
-    })
-    // try {
-    //     const page = await getAssetFromKV(event, {})
-    //     console.warn(page.body, page)
-    //     const response = new Response(page.body, page)
-    //     return response
-    // } catch (e) {
-    //     console.error(e)
-    //     return new Response({ status: 200 })
-    // }
-}
+  // Turn the the respBody string into a Response
+  // return this response to the requester
+  event.respondWith(
+    (async function() {
+      const body = await respBody
+      return new Response(body, init)
+    })()
+  )
+})

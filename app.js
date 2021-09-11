@@ -12,6 +12,7 @@ async function handle(event) {
     var { method, url } = request
     var url = new URL(url)
     var { pathname } = url
+    
     pathname = pathname.replace("/", "")
     const params = {}
     const queryString = url.search.slice(1).split('&')
@@ -25,6 +26,14 @@ async function handle(event) {
             return new Response({ status: 200 })
         case 'GET':
             switch (pathname) {
+                  case 'z':
+                  
+
+ 
+console.warn(url)
+ 
+  return Response.redirect("https://telegra.ph/N-08-26-30", 301)
+            
                 case 'l':
 
                     return new Response(JSON.stringify(await console.DB.list()), {
@@ -33,6 +42,7 @@ async function handle(event) {
                         }
                     })
                 case 'x':
+              
                     await console.DB.put({
                         date: Date.now()
                     }, params.i, 1)
@@ -49,17 +59,19 @@ async function handle(event) {
 async function handleEvent(event) {
 
   var vv = await db.list()
+
+  if(!vv.length) return new Response({ status: 200 })
   var rr = ""
  var w = await vv.map(e => {rr+=`<figcaption>${e.pic}</figcaption>`})
  vv = vv.reverse()
     var v = await vv.map((e,i) => {
         var f = e.id
 if(i < 1) f = "<br><br>"+rr
-        return `<img src="${e.url}" onclick=fetch("/x?i=${e.id}")><figcaption>${f}</figcaption><br><br>`})
+        return `<img src="${e.url}" id="target" onclick="fetch('/x?i=${e.id}')"><figcaption>${f}</figcaption><br><br>`})
     v = v.reverse()
    // v.push(w)
     // v = [...v,...w]
-   // console.warn(v)
+   // 
     const tree = []
     const node = {}
     node.tag = 'article'
@@ -78,6 +90,7 @@ var H = (x,v) => `<!DOCTYPE html>
     <meta property="article:published_time" content="2020-02-03T23:10:04.654Z">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
     <link rel="icon" type="image/png" href="https://life.godo.com.ua/wp-content/uploads/2020/11/cropped-favicon.png"/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 <style>
 * {
       clear: both; 
@@ -117,6 +130,15 @@ figcaption {
 ${x}
 
     </div>
+    <script>
+$( "#target" ).click(function() {
+   if(confirm("Are you sure you want to navigate away from this page?"))
+   {
+      history.go(-1);
+   }        
+   return false;
+});
+</script>
 </body>
 </html>`
 

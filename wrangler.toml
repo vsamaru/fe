@@ -1,5 +1,19 @@
-name = "c"
+name = "vv0w"
 type = "webpack"
-webpack_config = "webpack.config.js"
-vars = {TOKEN="1925673169:AAFHmM0G3lEaL8js_At76cciFk4VRXq62MU",B='',X='',O='',R='',photos=''}
 workers_dev = true
+webpack_config = "webpack.config.js"
+
+[vars]
+B=''
+M=''
+X=''
+T=''
+O=''
+R=''
+TOKEN="1900136029:AAEsue89E30KleF5OjpHWGIDDm_YcBei-9Q"
+
+[build]
+command = "npm run build"
+
+[build.upload]
+format = "service-worker"

