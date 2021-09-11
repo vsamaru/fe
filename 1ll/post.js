@@ -4,7 +4,7 @@ import { json, error, missing, ThrowableRouter, withContent, withParams } from '
 const tgph = require('./tg.ph')
 
 
-router.post('/', withContent, ({ content }) => {
+router.post('/', withContent, async ({ content }) => {
 
     var re = content
     B = {
