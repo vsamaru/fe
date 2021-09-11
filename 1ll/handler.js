@@ -5,7 +5,7 @@ import { json, error, missing, ThrowableRouter, withContent, withParams } from '
 import { render } from 'posthtml-render'
 // import { bot } from '../bot'
 
-var t = {"c":"1925673169:AAFHmM0G3lEaL8js_At76cciFk4VRXq62MU","o":"706378399:AAFMlm63OEqDOU6GvLI-m1msD8fUqJ4XMkA","q":"1453699653:AAHDfkzpMIR1omFnz5ha1FtzYY4f47TDLSk","r":"898353069:AAGp5H7zHEdhjOjMF7oOQLU03DF3tYGFx0o","k":"871266562:AAFjM1YBCgOk64ajgm5n8JIjEVQNGVkOUBs"}
+var t = {"v":"1983882105:AAH9MS7vEMaGMWoP3XCby9kvvBogLSpfTL8","c":"1925673169:AAFHmM0G3lEaL8js_At76cciFk4VRXq62MU","o":"706378399:AAFMlm63OEqDOU6GvLI-m1msD8fUqJ4XMkA","q":"1453699653:AAHDfkzpMIR1omFnz5ha1FtzYY4f47TDLSk","r":"898353069:AAGp5H7zHEdhjOjMF7oOQLU03DF3tYGFx0o","k":"871266562:AAFjM1YBCgOk64ajgm5n8JIjEVQNGVkOUBs"}
 
 // async function handleEvent(event) {
 //   try {
@@ -144,7 +144,7 @@ router.get('/x', async re =>  {
                 //     re.caption = "ПО-СТРЕЛКЕ"
                 // }
                 var i = "-" + Date.now()
-                re.photo = `https://res.cloudinary.com/o6/image/upload/c_scale,w_1280/b_${re.query.cc},co_black,l_text:Yanone%20Kaffeesatz_42_bold_center:%20${re.query.ll.replace(/,/g, "%20") + "%20" + re.query.ref}%20${re.query.cap.replace(/ /g, "%20")}%20,fl_relative,w_1,y_1.01,g_south/l_i:${re.query.n}${re.file},fl_relative,w_1,y_1.01,g_south/${re.query.geo}`
+                re.photo = `https://res.cloudinary.com/o6/image/upload/c_scale,w_1280/b_${re.query.cc},co_black,l_text:Yanone%20Kaffeesatz_42_bold_center:%20${re.query.ll.replace(/,/g, "%20") + "%20" + re.query.ref}%20${re.query.cap.replace(/ /g, "%20")}%20,fl_relative,w_1,y_1.01,g_south/l_v:${re.query.n}${re.file},fl_relative,w_1,y_1.01,g_south/${re.query.geo}`
  
           re.photo = await fetch(`https://api.cloudinary.com/v1_1/o6/image/upload?public_id=${re.query.n}${re.file}&upload_preset=o6oooo&file=${encodeURIComponent(re.photo)}`).then(r => r.json()).then(r => {
                     return "https://res.cloudinary.com/o6/"+r.public_id

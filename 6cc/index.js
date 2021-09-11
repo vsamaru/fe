@@ -70,7 +70,7 @@
                 }
 
                 re.photo = re.photo[re.photo.length - 1].file_id
-               B.photo = await fetch(`https://clo.wwv.workers.dev/x?id=${re.photo}&ll=${X.location}&geo=${X.geo}&cap=${re.caption}&ref=${X.ref}&t=${TOKEN}&n=${"i"}&cc=${X.cc}`)
+               B.photo = await fetch(`https://clo.wwv.workers.dev/x?id=${re.photo}&ll=${X.location}&geo=${X.geo}&cap=${re.caption}&ref=${X.ref}&t=${TOKEN}&n=${"v"}&cc=${X.cc}`)
   .then( r => r.json() )
 
                 /*
