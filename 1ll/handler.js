@@ -1,6 +1,6 @@
 // import { getAssetFromKV } from '@cloudflare/kv-asset-handler'
 import './6cc'
-import { json, error, missing, ThrowableRouter, withContent, withParams } from './itty-router-extras'
+import { json, error, missing, ThrowableRouter, withContent, withParams } from './index'
 // import './handler'
 import { render } from 'posthtml-render'
 // import { bot } from '../bot'
