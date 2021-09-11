@@ -11,6 +11,7 @@
 		"esm": "^3.2.25",
 		"firebase-firestore-lite": "^1.0.3",
 		"isomorphic-unfetch": "^3.1.0",
+		"mime": "^2.5.2",
 		"posthtml-render": "^3.0.0",
 		"telegra.ph": "^1.0.1"
 	}
