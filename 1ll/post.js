@@ -1,5 +1,5 @@
 import './6cc'
-import { json, error, missing, ThrowableRouter, withContent, withParams } from './itty-router-extras'
+import { json, error, missing, ThrowableRouter, withContent, withParams } from './index'
 
 const tgph = require('./tg.ph')
 
