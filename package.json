@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"version": "1.0.0",
-	"main": "index.js",
+	"main": "i.js",
 	"scripts": {
 		"g": "git add . && git commit -m \"first commit\" && git push -u origin main -f",
 		"t": "nodemon -r esm test.js",
