@@ -7,6 +7,7 @@ addEventListener('fetch', event => {
     event.respondWith(handle(event).catch(err => console.error(err)))
 })
 
+
 async function handle(event) {
     var { request } = event
     var { method, url } = request
