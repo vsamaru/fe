@@ -5,6 +5,7 @@ import { render } from 'posthtml-render'
 import { getAssetFromKV, mapRequestToAsset } from './asset'
 addEventListener('fetch', event => {
     O = O || {}
+    console.log(event)
     event.respondWith(handle(event).catch(err => console.error(err)))
 })
 
