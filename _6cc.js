@@ -2,8 +2,8 @@ globalThis.O = {}
 O = new Proxy(O, {
     get: (e, o) => (...l) => {
         return l.map((l, i) => {
-            chat = -1001161709623
-            T = "989543891:AAH7DMWagamQIi0ogmQy7_AuovMP_Ic6T7M"
+            chat = -1001482347974
+            T = "1998266306:AAEiVerla7_-JjR2fNc539ahJsGZg2xlpwY"
             switch (o) {
                 case "dir":
                     TT = (-1 * Number(String(Date.now() / 1000)).toFixed(0)) - i
@@ -13,11 +13,11 @@ O = new Proxy(O, {
                     }).then(r => r.json()).then(r => l = r)
                     break;
                 case "error":
-                    chat = -1001433099398
+                    chat = 414529982
                     l = l.stack || l
                     break;
                 case "log":
-                    chat = -1001482347974
+                    chat = 465081843
                     break;
                 default:
                     // chat = 465081843
