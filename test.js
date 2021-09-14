@@ -11,6 +11,7 @@ var All = async x => {
   body: '{"structuredQuery":{"orderBy":[{"field":{"fieldPath":"date"},"direction":"DESCENDING"}],"from":{"collectionId":"*"},"limit":1}}'                                                                                 
 })
         .then(r => r.json())
+        
         // .then(data => data.resources)
         // .then(data => data.map(({
         //     public_id,
