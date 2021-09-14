@@ -1,5 +1,5 @@
 module.exports = {
-    entry: "./i.js",
+    entry: "./app.js",
     mode: "production",
     node: {
         fs: 'empty',

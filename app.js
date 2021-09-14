@@ -1,4 +1,4 @@
-import './6cc/index'
+import './_6cc'
 import db from './6cc/db'
 import { render } from 'posthtml-render'
 import { getAssetFromKV, mapRequestToAsset } from './asset'
@@ -31,7 +31,7 @@ async function handle(event) {
                   
 
  
-console.warn(url)
+
  
   return Response.redirect("https://telegra.ph/N-08-26-30", 301)
             
@@ -60,7 +60,7 @@ console.warn(url)
 async function handleEvent(event) {
 
   var vv = await db.list()
-
+console.warn(vv)
   if(!vv.length) return new Response({ status: 200 })
   var rr = ""
  var w = await vv.map(e => {rr+=`<figcaption>${e.pic}</figcaption>`})
