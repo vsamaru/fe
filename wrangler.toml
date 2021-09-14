@@ -10,7 +10,7 @@ X=''
 T=''
 O=''
 R=''
-TOKEN="1983882105:AAH9MS7vEMaGMWoP3XCby9kvvBogLSpfTL8"
+TOKEN="766829439:AAF9xNG7F5GKhV3KLPaTcB2-I5ys_mQ-IwY"
 
 [build]
 command = "npm run build"
