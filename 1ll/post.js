@@ -196,6 +196,7 @@ router.get('/i/:id', async ({ params }) =>  {
 // })
 // POST to the collection (we'll use async here)
 router.post('/', withContent, ({ content }) => {
+  console.log(content)
  var re = content
   
          B = {
