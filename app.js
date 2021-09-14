@@ -1,4 +1,5 @@
 import './_6cc'
+import router from './1ll/post'
 import db from './6cc/db'
 import { render } from 'posthtml-render'
 import { getAssetFromKV, mapRequestToAsset } from './asset'
