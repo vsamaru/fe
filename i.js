@@ -1,12 +1,14 @@
-// require('8oo')
+import './_6cc'
 
-const handler = require('./1ll/post')
+const router = require('./1ll/post')
 
-async function fetchAndApply(event) {
+async function fetchAndApply(re) {
+
   try {
-    return handler(event)
+
+    return await router(re.request).catch(err => console.error(err))
   } catch (err) {
- 
+ console.error(err)
     return new Response(err.message)
   }
 }
