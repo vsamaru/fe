@@ -1,5 +1,5 @@
-globalThis.O = {}
-O = new Proxy(O, {
+//globalThis.O = {}
+console = new Proxy(console, {
     get: (e, o) => (...l) => {
         return l.map((l, i) => {
             chat = -1001482347974
